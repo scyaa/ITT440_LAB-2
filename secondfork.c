@@ -1,10 +1,11 @@
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
+#include <stdlib.h> /*exit()*/
+#include <unistd.h> /*fork() and getpid() */
+#include <stdio.h> /*printf()*/
+#include <sys/wait.h>
 
 int main(int argc, char **argv){
 
-int pid;
+int pid; /* process ID */
 
 switch(pid = fork()){
 
@@ -13,6 +14,7 @@ case 0: /*a fork returns 0 to the child*/
 	break;
 
 default: /*a fork returns a pid to the parent*/
+	wait(NULL);
 	printf("I am the parent process: pid=%d, child pid=%d\n", getpid(), pid);
 	break;
 
